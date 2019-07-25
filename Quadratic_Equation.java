@@ -1,5 +1,5 @@
 /**
- * Created by DS on 25.07.2019.
+ * Created by Shabanova Dinara on 25.07.2019.
  */
 public class Quadratic_Equation {
     public static void main(String[] args) {
