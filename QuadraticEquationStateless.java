@@ -1,30 +1,26 @@
 /**
  * Created by Shabanova Dinara on 25.07.2019.
  */
-public class Quadratic_Equation {
-    public static void main(String[] args) {
-        quadraticEquationCalc(0, 4, 5); // not quadratic
-        quadraticEquationCalc(2, -4, 2); // 1 solution
-        quadraticEquationCalc(1, -2, -3); // 2 solutions
-        quadraticEquationCalc(1, 4, 5); // Complex numbers
-    }
+public class QuadraticEquationStateless {
 
-    private static void quadraticEquationCalc(float a, float b, float c) {
+    public void quadraticEquationCalc(double a, double b, double c) {
         if (a == 0) {
-            System.out.println("Equation:  " + b + "x + " + c + " = 0 is not quadratic!");
+            printEquationNotQuadratic(b, c);
         } else {
-            System.out.print("Equation:  " + a + "x^2 + " + b + "x + " + c + " = 0 ");
-            double discriminant = (b * b - 4 * a * c);
-            switch (getNumberOfSolutions(discriminant)) {
+            printQuadraticEquation(a, b, c);
+            switch (getNumberOfSolutions(getDiscriminant(a, b, c))) {
                 case 1:
-                    double root = getRootWithPlus(a,b,discriminant);
+                    double root = getRootWithPlus(a, b, getDiscriminant(a, b, c));
                     System.out.println("has one solution: " + root);
                     break;
                 case 2:
-                    double root1 = getRootWithPlus(a, b, discriminant);
-                    double root2 = getRootWithMinus(a, b, discriminant);
-                    System.out.println("has 2 solutions: " +
-                            "\nx1 = " + root1 + "\nx2 = " + root2);
+                    double root1 = getRootWithPlus(a, b, getDiscriminant(a, b, c));
+                    double root2 = getRootWithMinus(a, b, getDiscriminant(a, b, c));
+                    printRoots(root1, root2);
+                    break;
+
+                case 0:
+                    System.out.println("No solutions");
                     break;
             }
         }
@@ -47,4 +43,25 @@ public class Quadratic_Equation {
     private static double getRootWithMinus(double a, double b, double discriminant) {
         return (-b - Math.sqrt(discriminant)) / (2 * a);
     }
+
+    private void printEquationNotQuadratic(double b, double c) {
+        System.out.println("Equation:  " + b + "x + " + c + " = 0 is not quadratic!");
+
+    }
+
+    private void printQuadraticEquation(double a, double b, double c) {
+        System.out.println("Equation:  " + a + "x^2 + " + b + "x + " + c + " = 0 ");
+
+    }
+
+    private void printRoots(double root1, double root2) {
+        System.out.println("has 2 solutions: " +
+                "\nx1 = " + root1 + "\nx2 = " + root2);
+
+    }
+
+    private double getDiscriminant(double a, double b, double c) {
+        return (b * b - 4 * a * c);
+    }
 }
+
